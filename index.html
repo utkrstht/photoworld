@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="styles.css">
+<script src="script.js" defer></script>
+
+<title>photoworld - kaboom</title>
+</head>
+<body>
+
+<div id="desktop">
+
+  <div class="window" id="win-explorer" data-task style="left:4vw;top:3vh;width:min(780px,94vw);height:min(560px,calc(100vh - 74px))">
+    <div class="titlebar" data-drag>
+      <span id="exp-title-icon"></span>
+      <span class="title" id="exp-title">My Photos</span>
+      <div class="tbtns">
+        <button class="tbtn" data-act="min" title="Minimize"><svg width="8" height="8"><rect x="1" y="6" width="6" height="2" fill="#000"/></svg></button>
+        <button class="tbtn" data-act="max" title="Maximize"><svg width="8" height="8"><rect x="0.5" y="0.5" width="7" height="7" fill="none" stroke="#000"/><rect x="0.5" y="0.5" width="7" height="2" fill="#000"/></svg></button>
+        <button class="tbtn" data-act="close" title="Close"><svg width="8" height="8"><path d="M1 1L7 7M7 1L1 7" stroke="#000" stroke-width="1.6"/></svg></button>
+      </div>
+    </div>
+    <div class="menubar"><span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Help</span></div>
+    <div class="toolbar">
+      <button class="btn" id="btn-back" disabled>&#9664;<span>Back</span></button>
+      <button class="btn" id="btn-fwd" disabled><span>Forward</span>&#9654;</button>
+      <button class="btn" id="btn-up">&#9650;<span>Up</span></button>
+      <div class="addr">
+        <span>Address</span>
+        <div class="addr-box sunken"><span id="addr-icon"></span><span id="addr-path">C:\My Photos</span></div>
+      </div>
+    </div>
+    <div class="explorer-body">
+      <div class="sidebar sunken"><div id="tree"></div></div>
+      <div class="content sunken"><div class="grid" id="grid"></div></div>
+    </div>
+    <div class="statusbar">
+      <div class="seg grow sunken" id="status-count">19 object(s)</div>
+      <div class="seg sunken">My Computer</div>
+    </div>
+  </div>
+
+  <div class="window hidden" id="win-viewer" data-task style="left:32vw;top:9vh;width:min(560px,92vw);height:min(470px,calc(100vh - 100px))">
+    <div class="titlebar inactive" data-drag>
+      <span id="view-title-icon"></span>
+      <span class="title" id="viewer-title">Photo</span>
+      <div class="tbtns">
+        <button class="tbtn" data-act="min" title="Minimize"><svg width="8" height="8"><rect x="1" y="6" width="6" height="2" fill="#000"/></svg></button>
+        <button class="tbtn" data-act="max" title="Maximize"><svg width="8" height="8"><rect x="0.5" y="0.5" width="7" height="7" fill="none" stroke="#000"/><rect x="0.5" y="0.5" width="7" height="2" fill="#000"/></svg></button>
+        <button class="tbtn" data-act="close" title="Close"><svg width="8" height="8"><path d="M1 1L7 7M7 1L1 7" stroke="#000" stroke-width="1.6"/></svg></button>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="btn" id="btn-prev">&#9664;<span>Prev</span></button>
+      <button class="btn" id="btn-next"><span>Next</span>&#9654;</button>
+    </div>
+    <div class="viewer-body sunken"><img id="viewer-img" alt=""></div>
+    <div class="statusbar">
+      <div class="seg grow sunken" id="viewer-page">Page 1 of 1</div>
+      <div class="seg sunken">640 x 480</div>
+    </div>
+  </div>
+
+  <div class="window hidden" id="win-shutdown" style="left:calc(50% - 140px);top:30vh;width:280px">
+    <div class="titlebar" data-drag>
+      <span class="title">Shut Down Windows</span>
+      <div class="tbtns">
+        <button class="tbtn" data-act="close" title="Close"><svg width="8" height="8"><path d="M1 1L7 7M7 1L1 7" stroke="#000" stroke-width="1.6"/></svg></button>
+      </div>
+    </div>
+    <div class="dialog-body">
+      <span id="sd-icon"></span>
+      <div>
+        <div style="margin-bottom:6px">What do you want the computer to do?</div>
+        <select id="sd-select">
+          <option>Stand by</option>
+          <option selected>Shut down</option>
+          <option>Restart</option>
+        </select>
+      </div>
+    </div>
+    <div class="dialog-btns">
+      <button class="btn" id="sd-ok" style="min-width:70px">OK</button>
+      <button class="btn" id="sd-cancel" style="min-width:70px">Cancel</button>
+    </div>
+  </div>
+
+  <div id="startmenu" class="hidden">
+    <div class="sm-side"><b>Photo</b>World&nbsp;98</div>
+    <div class="sm-items">
+      <div class="sm-item" data-act="photos"><span id="sm-icon"></span><b>My Photos</b></div>
+      <div class="sm-sep"></div>
+      <div class="sm-item" data-act="shutdown"><span id="sd-icon2"></span>Shut Down...</div>
+    </div>
+  </div>
+
+  <div id="taskbar">
+    <button class="btn" id="start-btn">
+      <svg width="15" height="13" viewBox="0 0 15 13" shape-rendering="crispEdges">
+        <path d="M0 2.4 L5.6 1.4 V5.5 L0 6.5Z" fill="#f35325"/>
+        <path d="M6.6 1.2 L15 0 V5.3 L6.6 5.5Z" fill="#81bc06"/>
+        <path d="M0 7.3 L5.6 6.4 V10.9 L0 11.9Z" fill="#05a6f0"/>
+        <path d="M6.6 6.4 L15 5.6 V13 L6.6 12.1Z" fill="#ffba08"/>
+      </svg>
+      <span>Start</span>
+    </button>
+    <div class="tb-sep"></div>
+    <div id="tasks"></div>
+    <div id="tray" class="thin-in"><span id="clock">12:00 PM</span></div>
+  </div>
+
+  <div id="shutdown-screen" class="hidden">
+    <div>It's now safe to turn off your computer.</div>
+    <div class="hint">(click anywhere to continue)</div>
+  </div>
+
+</div>
+</body>
+</html>
